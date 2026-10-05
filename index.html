@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Space Apps 2026: Abandoned Hardware Workbook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="notebook-container">
+        <nav class="notebook-tabs" id="tabContainer">
+            <button class="tab-btn active" onclick="switchArtifact(0)">Opportunity Rover</button>
+            <button class="tab-btn" onclick="switchArtifact(1)">Apollo 11 ALSEP</button>
+            <button class="tab-btn" onclick="switchArtifact(2)">Voyager 1 Probe</button>
+            <button class="tab-btn" onclick="switchArtifact(3)">Spirit Rover</button>
+            <button class="tab-btn" onclick="switchArtifact(4)">Mars 3 Lander</button>
+            <button class="tab-btn" onclick="switchArtifact(5)">Apollo Lunar Module</button>
+        </nav>
+
+        <div class="logbook-page">
+            <header class="logbook-header">
+                <div class="logo-box">NASA // HIST-DIV // 2026</div>
+                <div class="title-area">
+                    <h1>RELICS: ORBITAL & SURFACE DEBRIS LOG</h1>
+                    <p class="subtitle">2026 NASA SPACE APPS CHALLENGE: ABANDONED BUT NOT FORGOTTEN</p>
+                </div>
+                <div class="meta-inputs">
+                    <div class="field-row">
+                        <label>RECORD ID:</label>
+                        <input type="text" id="logId" value="RECORD-SECTOR-01" readonly>
+                    </div>
+                    <div class="field-row">
+                        <label>HISTORIAN:</label>
+                        <input type="text" id="studentName" placeholder="[Enter Cadet Name]" oninput="saveCurrentData()">
+                    </div>
+                </div>
+            </header>
+
+            <section class="metadata-grid">
+                <div class="form-group">
+                    <label>Target Hardware Artifact</label>
+                    <input type="text" id="artifactName" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Deployment Site / Sector Location</label>
+                    <input type="text" id="planetaryBody" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Operational Window (Active Mission)</label>
+                    <input type="text" id="operationalDates" placeholder="Enter historical operational timeline dates..." oninput="saveCurrentData()">
+                </div>
+                <div class="form-group">
+                    <label>Current Status Condition</label>
+                    <select id="hardwareStatus" onchange="saveCurrentData()">
+                        <option value="decommissioned">Decommissioned / Archaeological Monument</option>
+                        <option value="impacted">Impacted / Scattered Components</option>
+                        <option value="active-silent">Silent Transmitters / Passive Relic</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="visual-media-grid">
+                <div class="visual-box">
+                    <div class="box-header">
+                        <h3>VISUAL SCHEMATIC / FINAL TRAJECTORY PATH</h3>
+                        <div class="canvas-btn-group">
+                            <button type="button" onclick="loadDefaultTemplate()" class="btn btn-secondary">Reset Outline</button>
+                            <button type="button" onclick="clearCanvas()" class="btn btn-secondary btn-danger">Wipe</button>
+                        </div>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="artifactCanvas" width="400" height="230"></canvas>
+                    </div>
+                    
+                    <div class="intel-wrapper">
+                        <div class="intel-header">
+                            <span class="intel-title">📟 Archival Intel Summary</span>
+                            <button type="button" id="audioLogBtn" onclick="toggleAudioLog()" class="btn btn-audio">📻 Play Audio Log</button>
+                        </div>
+                        <div class="intel-panel" id="archivalIntel"></div>
+                    </div>
+                </div>
+
+                <div class="visual-box">
+                    <div class="box-header">
+                        <h3>🔴 LIVE HD TELEMETRY STREAM & ARCHIVAL PHOTOGRAPH</h3>
+                        <div class="canvas-btn-group">
+                            <label for="imageUpload" class="btn btn-secondary">📂 Override with Photo</label>
+                            <input type="file" id="imageUpload" accept="image/*" onchange="handleImageUpload(event)">
+                        </div>
+                    </div>
+                    <div class="preview-container" id="mediaDisplayContainer">
+                        <iframe id="nasaInteractiveFrame" src="about:blank" allowfullscreen loading="lazy"></iframe>
+                        <div id="photoPreview" class="hidden-photo"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="written-analysis-section">
+                <div class="form-group">
+                    <label>Space Weather Degradation & Telemetry Glitch Assessment</label>
+                    <textarea id="environmentalImpact" placeholder="Analyze how solar flare radiation, extreme CMEs, solar winds, and magnetosphere disturbances can cause communication degradation, satellite failures, single-event upsets, or power surges in these old components over deep time frames..." oninput="saveCurrentData(); updateChecklist();"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Historical Storytelling Narrative & Science Legacy Statement</label>
+                    <textarea id="historicalNarrative" placeholder="Tell the stories of these discarded machines. What primary scientific insights did they make possible? How does tracking their resting locations help future human space travelers?..." oninput="saveCurrentData(); updateChecklist();"></textarea>
+                </div>
+            </section>
+
+            <section class="student-manual-section">
+                <h3>📖 CADET FLIGHT MANUAL & OPERATIONS INSTRUCTIONS</h3>
+                <ol>
+                    <li><strong>Register Credentials:</strong> Type your code identity into the <em>Recording Historian</em> field at the top of the ledger.</li>
+                    <li><strong>Analyze the Core Intel:</strong> Explore each case file tab. Review the pre-loaded technical stats and click <strong>📻 Play Audio Log</strong> to decode telemetry audio relays.</li>
+                    <li><strong>Interact with Live Maps:</strong> Use your cursor directly inside the <strong>Live HD Telemetry Box</strong> to pan, tilt, and zoom around real-time 3D planetary models provided by <em>NASA's Eyes</em>.</li>
+                    <li><strong>Sketch & Map Coordinates:</strong> Draw structural damage overlays or final path lines directly over the blueprint canvas matrix.</li>
+                    <li><strong>Submit logs:</strong> Check that your page readiness score reads **100%**, then click **Download Global Book Data (CSV)** to secure your data file or **Export Case Files (PDF)** to print your physical report sheet.</li>
+                </ol>
+            </section>
+
+            <section class="grading-checklist-section">
+                <h3>📌 LOG SHEET MISSION COMPLETION VALIDATION CHECKLIST</h3>
+                <div class="checklist-grid">
+                    <div class="check-item" id="chkHistorian">
+                        <span class="status-icon">❌</span> Cadet Historian Name Registered
+                    </div>
+                    <div class="check-item" id="chkTimeline">
+                        <span class="status-icon">❌</span> Mission Operational Dates Logged
+                    </div>
+                    <div class="check-item" id="chkVisual">
+                        <span class="status-icon">❌</span> Technical Schematic Blueprint Sketched
+                    </div>
+                    <div class="check-item" id="chkWeather">
+                        <span class="status-icon">❌</span> Space Weather Corrosion Analysis Filed
+                    </div>
+                    <div class="check-item" id="chkNarrative">
+                        <span class="status-icon">❌</span> Historical Legacy Storytelling Completed
+                    </div>
+                    <div class="check-item mega-progress" id="totalCompletion">
+                        Current Page Readiness Status: <strong>0%</strong>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="logbook-footer">
+                <div class="action-buttons">
+                    <button type="button" onclick="exportToCSV()" class="btn btn-export">💾 Download Global Book Data (CSV)</button>
+                    <button type="button" onclick="window.print()" class="btn btn-print">🖨️ Export Case Files (PDF)</button>
+                </div>
+                
+                <div class="dashboard-links-section">
+                    <h4>📡 Interactive Telemetry Dashboards & Space Weather Maps:</h4>
